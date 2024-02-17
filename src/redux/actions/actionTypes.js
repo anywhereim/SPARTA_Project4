@@ -1,0 +1,6 @@
+export const SET_LETTERS = "SET_LETTERS";
+export const ADD_LETTERS = "ADD_LETTERS";
+export const EDIT_LETTERS = "EDIT_LETTERS";
+export const DELETE_LETTERS = "DELETE_LETTERS";
+export const OPEN_LETTERS = "OPEN_LETTERS";
+export const CLOSE_LETTERS = "CLOSE_LETTERS";
