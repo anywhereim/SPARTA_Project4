@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Button from "../layout/Button";
 import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
-import { LetterContext } from "../../context/LetterContext";
+import { LetterContext } from "../../contextLetter/LetterContext";
 
 export default function LetterForm({ imgUrl, text, personName }) {
-  const { onAddLetter } = useContext(LetterContext);
+  const { getLetterInfo } = useContext(LetterContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -18,8 +18,7 @@ export default function LetterForm({ imgUrl, text, personName }) {
       return;
     }
 
-    onAddLetter({
-      id: uuidv4(),
+    getLetterInfo({
       content,
       nickname,
       date,

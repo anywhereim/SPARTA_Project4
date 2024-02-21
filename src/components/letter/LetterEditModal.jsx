@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../layout/Button";
 import styled from "styled-components";
+import { LetterContext } from "../../contextLetter/LetterContext";
 
-export default function LetterEditModal({ edit, onClose, onSubmit }) {
+export default function LetterEditModal() {
+  const { edit, onSubmit, onClose } = useContext(LetterContext);
   const [editedContent, setEditedContent] = useState([edit.content]);
 
-  const handleSubmit = (e) => {
+  const handleEditLetterSubmit = (e) => {
     e.preventDefault();
     const newContent = e.target.editContent.value;
 
@@ -18,6 +20,7 @@ export default function LetterEditModal({ edit, onClose, onSubmit }) {
       ...edit,
       content: newContent,
     });
+    alert("수정된 내용이 적용되었습니다.😆");
     onClose();
   };
 
@@ -29,7 +32,7 @@ export default function LetterEditModal({ edit, onClose, onSubmit }) {
   });
 
   return (
-    <ModalForm onSubmit={handleSubmit}>
+    <ModalForm onSubmit={handleEditLetterSubmit}>
       <Modal1Box>
         <ModalH1>닉네임: {edit.nickname}</ModalH1>
         <ModalH1>작성일자: {getdate}</ModalH1>
@@ -40,12 +43,18 @@ export default function LetterEditModal({ edit, onClose, onSubmit }) {
         onChange={(e) => setEditedContent(e.target.value)}
       />
       <ModalButtons>
-        <Button text="완료" line="underline" color="#00B1AB" />
+        <Button
+          text="수정하기"
+          line="underline"
+          color="#00B1AB"
+          type="button"
+        />
         <Button //
           text="취소"
           line="underline"
           color="#00B1AB"
           onClick={onClose}
+          type="button"
         />
       </ModalButtons>
     </ModalForm>

@@ -11,6 +11,11 @@ import Solar from "./components/rootpages/Solar";
 import MoonByul from "./components/rootpages/MoonByul";
 import HwaSa from "./components/rootpages/HwaSa";
 import WheEin from "./components/rootpages/WheEin";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
+import { useEffect } from "react";
+import { fetchPostInstance } from "./api/axiosInstance";
+import UserInfoProvider from "./contextLogin/UserInfoContext";
 
 const router = createBrowserRouter([
   {
@@ -29,12 +34,23 @@ const router = createBrowserRouter([
     element: <Detail />,
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
     path: "*",
     element: <Navigate replace to="/" />,
   },
 ]);
 
 function App() {
+  useEffect(() => {
+    fetchPostInstance();
+  }, []);
   return <RouterProvider router={router} />;
 }
 

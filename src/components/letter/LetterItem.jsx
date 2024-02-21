@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../layout/Button";
 import styled from "styled-components";
+import { LetterContext } from "../../contextLetter/LetterContext";
 
-export default function LetterItem({ letter, onDeleted, onEdit }) {
+export default function LetterItem({ letter }) {
   const { id, content, nickname, date } = letter;
+  const { onDeleted, onEdit } = useContext(LetterContext);
+  // const dateObject = new Date(date);
 
-  const getdate = date.toLocaleString("ko-KR", {
-    weekday: "long",
+  const getdate = new Date(date).toLocaleString("ko-KR", {
+    // weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -24,12 +27,14 @@ export default function LetterItem({ letter, onDeleted, onEdit }) {
         </ShowContentBox>
         <ButtonBox>
           <Button
-            text="수정"
+            type="button"
+            text="상세보기"
             line="underline"
             color="#00B1AB"
             onClick={() => onEdit(id)}
           />
           <Button
+            type="button"
             text="삭제"
             onClick={() => onDeleted(id)}
             line="underline"

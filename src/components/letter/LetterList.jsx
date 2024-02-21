@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import LetterItem from "./LetterItem";
 import styled from "styled-components";
+import { LetterContext } from "../../contextLetter/LetterContext";
 
-export default function LetterList({
-  letters,
-  text,
-  onDeleted,
-  onEdit,
-  personName,
-}) {
+export default function LetterList({ text, personName, selectedPerson }) {
+  const { letters } = useContext(LetterContext);
+
   return (
     <Section>
       <SectionTitle>{text}</SectionTitle>
@@ -19,11 +16,7 @@ export default function LetterList({
           )
           .map((filteredLetter) => (
             <SectionLi key={filteredLetter.id}>
-              <LetterItem
-                letter={filteredLetter}
-                onDeleted={onDeleted}
-                onEdit={onEdit}
-              />
+              <LetterItem letter={filteredLetter} />
             </SectionLi>
           ))}
       </SectionUl>

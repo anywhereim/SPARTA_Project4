@@ -3,7 +3,7 @@ import LetterForm from "../letter/LetterForm";
 import LetterList from "../letter/LetterList";
 import styled from "styled-components";
 import LetterEditModal from "../letter/LetterEditModal";
-import { LetterContext } from "../../context/LetterContext";
+import { LetterContext } from "../../contextLetter/LetterContext";
 
 export default function LetterPerson({
   imgUrl,
@@ -11,42 +11,14 @@ export default function LetterPerson({
   personName,
   listText,
 }) {
-  const {
-    letters,
-    setLetters,
-    edit,
-    modal,
-    onDeleted,
-    onEdit,
-    onSubmit,
-    onClose,
-    onAddLetter,
-  } = useContext(LetterContext);
+  const { letters, modal } = useContext(LetterContext);
 
   return (
     <MainForm>
-      <LetterForm
-        // onAddLetter={onAddLetter}
-        imgUrl={imgUrl}
-        text={formText}
-        personName={personName}
-      />
+      <LetterForm imgUrl={imgUrl} text={formText} personName={personName} />
 
-      <LetterList
-        text={listText}
-        letters={letters}
-        personName={personName}
-        onDeleted={onDeleted}
-        onEdit={onEdit}
-      />
-      {modal && (
-        <LetterEditModal
-          letter={letters}
-          edit={edit}
-          onClose={onClose}
-          onSubmit={onSubmit}
-        />
-      )}
+      <LetterList text={listText} letters={letters} personName={personName} />
+      {modal && <LetterEditModal />}
     </MainForm>
   );
 }

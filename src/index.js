@@ -1,14 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import LetterProvider from "./contextLetter/LetterContext";
+import UserInfoProvider from "./contextLogin/UserInfoContext";
 // import reportWebVitals from "./reportWebVitals";
-import LetterProvider from "./context/LetterContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <LetterProvider>
-    <App />
-  </LetterProvider>
+  <UserInfoProvider>
+    <LetterProvider>
+      <App />
+    </LetterProvider>
+  </UserInfoProvider>
 );
 
 // // If you want to start measuring performance in your app, pass a function

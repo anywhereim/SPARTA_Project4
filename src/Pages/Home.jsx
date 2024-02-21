@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <Navbar detail="전체 편지📭" />
+      <Navbar login="LOGIN🖐️" detail="FULL📭" />
       <Root />
     </div>
   );

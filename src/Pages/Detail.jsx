@@ -6,19 +6,10 @@ import LetterEditModal from "../components/letter/LetterEditModal";
 import Header from "../components/layout/Header";
 import Navbar from "../components/layout/Navbar";
 import Button from "../components/layout/Button";
-import { LetterContext } from "../context/LetterContext";
+import { LetterContext } from "../contextLetter/LetterContext";
 
 export default function Detail() {
-  const {
-    letters,
-    setLetters,
-    edit,
-    modal,
-    onDeleted,
-    onEdit,
-    onSubmit,
-    onClose,
-  } = useContext(LetterContext);
+  const { letters, setLetters, modal } = useContext(LetterContext);
 
   const [selectedPerson, setSelectedPerson] = useState(null);
 
@@ -37,13 +28,16 @@ export default function Detail() {
   };
 
   const handlePersonChange = (e) => {
+    e.preventDefault();
     setSelectedPerson(e.target.value);
   };
 
   return (
-    <form>
+    <>
       <Header />
-      <Navbar detail="HOME🏠" />
+      <NavButtons>
+        <Navbar detail="HOME🏠" />
+      </NavButtons>
       <SelectOption onChange={handlePersonChange}>
         <option value="">전체보기</option>
         <option value="hwasa">화사</option>
@@ -55,23 +49,17 @@ export default function Detail() {
         <Button text="최신 순" onClick={handleUpToDate} />
         <Button text="오래 된 순" onClick={handleOutOfDate} />
       </ButtonsBox>
-      <LetterList
-        letters={letters}
-        personName={selectedPerson}
-        onDeleted={onDeleted}
-        onEdit={onEdit}
-      />
-      {modal && (
-        <LetterEditModal
-          letter={letters}
-          edit={edit}
-          onClose={onClose}
-          onSubmit={onSubmit}
-        />
-      )}
-    </form>
+      <LetterList personName={selectedPerson} />
+      {modal && <LetterEditModal />}
+    </>
   );
 }
+
+const NavButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
 
 const ButtonsBox = styled.div`
   display: flex;
